@@ -7,6 +7,7 @@
     <title>Linked List</title>
   </head>
   <body>
+    <p id="ll-value"></p>
     <pre id="root"></pre>
     <script>
       // linked list constructor (exclude empty linked list)
@@ -63,6 +64,16 @@
           this.head = newNode;
           this.length++;
         }
+        
+        printList() {
+          const linkedListValueArray = [];
+          let currentNode = this.head;
+          while (currentNode !== null) {
+            linkedListValueArray.push(currentNode.value);
+            currentNode = currentNode.next;
+          }
+          return linkedListValueArray.join(" -> ");
+        }
       }
 
       // create a linked list through the self-defined constructor
@@ -71,7 +82,7 @@
       linkedList.append(15);
       linkedList.prepend(1);
 
-      console.log(linkedList);
+      document.querySelector("#ll-value").innerHTML = linkedList.printList();
       document.querySelector("#root").innerHTML = JSON.stringify(
         linkedList,
         null,
