@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Linked List</title>
+  </head>
+  <body>
+    <p>e.g., 10 -> 5 -> 16</p>
+    <pre id="root"></pre>
+    <script>
+
+      // create a linked list directly thought object literal
+      let linkedList = {
+        head: {
+          value: 10,
+          next: {
+            value: 5,
+            next: {
+              value: 16,
+              next: null
+            }
+          }
+        }
+      };
+
+      document.querySelector("#root").innerHTML = JSON.stringify(
+        linkedList,
+        null,
+        2
+      );
+    </script>
+  </body>
+</html>
