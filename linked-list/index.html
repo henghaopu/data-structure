@@ -7,7 +7,6 @@
     <title>Linked List</title>
   </head>
   <body>
-    <p>e.g., 10 -> 6 -> 15</p>
     <pre id="root"></pre>
     <script>
       // linked list constructor (exclude empty linked list)
@@ -54,12 +53,23 @@
           //     head                                      tail
           //                                               new
         }
+
+        prepend(value) {
+          const newNode = {
+            value,
+            next: null
+          };
+          newNode.next = this.head;
+          this.head = newNode;
+          this.length++;
+        }
       }
 
       // create a linked list through the self-defined constructor
       let linkedList = new LinkedList(10);
       linkedList.append(6);
       linkedList.append(15);
+      linkedList.prepend(1);
 
       console.log(linkedList);
       document.querySelector("#root").innerHTML = JSON.stringify(
