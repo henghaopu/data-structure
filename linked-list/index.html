@@ -10,20 +10,21 @@
     <p>e.g., 10 -> 5 -> 16</p>
     <pre id="root"></pre>
     <script>
-
-      // create a linked list directly thought object literal
-      let linkedList = {
-        head: {
-          value: 10,
-          next: {
-            value: 5,
-            next: {
-              value: 16,
-              next: null
-            }
-          }
+      // linked list constructor (exclude empty linked list)
+      class LinkedList {
+        constructor(value) {
+          // create the very first linked list node
+          this.head = {
+            value,
+            next: null
+          };
+          this.tail = this.head;
+          this.length = 1;
         }
-      };
+      }
+
+      // create a linked list through the self-defined constructor
+      let linkedList = new LinkedList(10);
 
       document.querySelector("#root").innerHTML = JSON.stringify(
         linkedList,
