@@ -64,6 +64,36 @@
           this.head = newNode;
           this.length++;
         }
+
+        insert(index, value) {
+          if (index >= this.length) {
+            return this.append(value);
+          }
+          if (index <= 0) {
+            return this.prepend(value);
+          }
+          
+          const newNode = {
+            value,
+            next: null
+          };
+          let previousNode = null;
+          let currentNode = this.head;
+          //      *   ->  *  ->  *      *   ->  *  ->  *        
+          //      p       c                     p      c                    
+          for (let i = 0; i < index; i++) {
+            // side: store the previous node that points to the current node
+            previousNode = currentNode;
+            // main: keep moving current node to the index
+            currentNode = currentNode.next;
+          }
+          //   p    c         p    c
+          //       /           \  /
+          //     n              n
+          newNode.next = currentNode;
+          previousNode.next = newNode;
+          this.length++;
+        }
         
         printList() {
           const linkedListValueArray = [];
@@ -80,7 +110,12 @@
       let linkedList = new LinkedList(10);
       linkedList.append(6);
       linkedList.append(15);
+
       linkedList.prepend(1);
+      
+      linkedList.insert(2, 99);
+      linkedList.insert(-300, -30);
+      linkedList.insert(900, 990);
 
       document.querySelector("#ll-value").innerHTML = linkedList.printList();
       document.querySelector("#root").innerHTML = JSON.stringify(
