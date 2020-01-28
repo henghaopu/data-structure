@@ -77,6 +77,8 @@
             value,
             next: null
           };
+
+          // traverse to index
           let previousNode = null;
           let currentNode = this.head;
           //      *   ->  *  ->  *      *   ->  *  ->  *        
@@ -94,7 +96,32 @@
           previousNode.next = newNode;
           this.length++;
         }
-        
+        //    *  ->  *  ->  *  ->  *        index = 2
+        //    p      c                      i = 0
+        //           p      c               i = 1                              
+        remove(index) {
+          // check params
+          if (index === 0) {
+             this.head = this.head.next;
+             this.length--;
+             return;
+          }
+          if (index < 0 || index >= this.length) {
+            console.log('index out of range!')
+            return;
+          }
+
+          // traverse to index 
+          let previousNode = null;
+          let currentNode = this.head;
+          for (let i = 0; i < index; i++) {
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+          }
+          previousNode.next = currentNode.next;
+          this.length--;
+        }
+
         printList() {
           const linkedListValueArray = [];
           let currentNode = this.head;
@@ -116,6 +143,8 @@
       linkedList.insert(2, 99);
       linkedList.insert(-300, -30);
       linkedList.insert(900, 990);
+
+      linkedList.remove(0);
 
       document.querySelector("#ll-value").innerHTML = linkedList.printList();
       document.querySelector("#root").innerHTML = JSON.stringify(
