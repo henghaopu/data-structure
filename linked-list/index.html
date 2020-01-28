@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Linked List</title>
+  </head>
+  <body>
+    <p id="ll-value"></p>
+    <pre id="root"></pre>
+    <script>
+      // linked list constructor (exclude empty linked list)
+      class LinkedList {
+        constructor(value) {
+          //  10  |  null
+          //    head
+          //    tail
+          this.head = {
+            value,
+            next: null
+          };
+          this.tail = this.head;
+          this.length = 1;
+        }
+
+        append(value) {
+          //  10   |   null      6   |   null
+          //     head
+          //     tail               new
+          const newNode = {
+            value,
+            next: null
+          };
+          //  10   |   ->        6   |   null
+          //     head
+          //     tail .next         new
+          this.tail.next = newNode;
+          //  10   |   ->        6   |   null
+          //     head               tail
+          //                        new
+          this.tail = newNode;
+          this.length++;
+
+          //  10   |   ->        6   |   null          15   |   null
+          //     head               tail
+          //                                               new
+
+          //  10   |   ->        6   |   ->            15   |   null
+          //     head               tail
+          //                            .next              new
+
+          //  10   |   ->        6   |   ->            15   |   null
+          //     head                                      tail
+          //                                               new
+        }
+
+        prepend(value) {
+          const newNode = {
+            value,
+            next: null
+          };
+          newNode.next = this.head;
+          this.head = newNode;
+          this.length++;
+        }
+
+        insert(index, value) {
+          if (index >= this.length) {
+            return this.append(value);
+          }
+          if (index <= 0) {
+            return this.prepend(value);
+          }
+          
+          const newNode = {
+            value,
+            next: null
+          };
+
+          // traverse to index
+          let previousNode = null;
+          let currentNode = this.head;
+          //      *   ->  *  ->  *      *   ->  *  ->  *        
+          //      p       c                     p      c                    
+          for (let i = 0; i < index; i++) {
+            // side: store the previous node that points to the current node
+            previousNode = currentNode;
+            // main: keep moving current node to the index
+            currentNode = currentNode.next;
+          }
+          //   p    c         p    c
+          //       /           \  /
+          //     n              n
+          newNode.next = currentNode;
+          previousNode.next = newNode;
+          this.length++;
+        }
+        //    *  ->  *  ->  *  ->  *        index = 2
+        //    p      c                      i = 0
+        //           p      c               i = 1                              
+        remove(index) {
+          // check params
+          if (index === 0) {
+             this.head = this.head.next;
+             this.length--;
+             return;
+          }
+          if (index < 0 || index >= this.length) {
+            console.log('index out of range!')
+            return;
+          }
+
+          // traverse to index 
+          let previousNode = null;
+          let currentNode = this.head;
+          for (let i = 0; i < index; i++) {
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+          }
+          previousNode.next = currentNode.next;
+          this.length--;
+        }
+
+        printList() {
+          const linkedListValueArray = [];
+          let currentNode = this.head;
+          while (currentNode !== null) {
+            linkedListValueArray.push(currentNode.value);
+            currentNode = currentNode.next;
+          }
+          return linkedListValueArray.join(" -> ");
+        }
+      }
+
+      // create a linked list through the self-defined constructor
+      let linkedList = new LinkedList(10);
+      linkedList.append(6);
+      linkedList.append(15);
+
+      linkedList.prepend(1);
+      
+      linkedList.insert(2, 99);
+      linkedList.insert(-300, -30);
+      linkedList.insert(900, 990);
+
+      linkedList.remove(0);
+
+      document.querySelector("#ll-value").innerHTML = linkedList.printList();
+      document.querySelector("#root").innerHTML = JSON.stringify(
+        linkedList,
+        null,
+        2
+      );
+    </script>
+  </body>
+</html>
