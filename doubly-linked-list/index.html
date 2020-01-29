@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Double Linked List</title>
+  </head>
+  <body>
+    <p id="list"></p>
+    <pre id="root"></pre>
+
+    <script>
+      class DoublyLinkedList {
+        constructor(value) {
+          this.head = {
+            value,
+            next: null,
+            previous: null
+          };
+          this.tail = this.head;
+          this.length = 1;
+        }
+
+        //    *  <->  *  <->  *     
+        //    h               t     
+        append(value) {
+          //    *  <->  *  <->  *      * 
+          //    h               t      n
+          const newNode = {
+            value,
+            next: null,
+            previous: null
+          };
+          //    *  <->  *  <->  *   ->  * 
+          //    h               t       n
+          this.tail.next = newNode;
+          //    *  <->  *  <->  *  <->  * 
+          //    h               t       n
+          newNode.previous = this.tail;
+          //    *  <->  *  <->  *  <->  * 
+          //    h                       n,t
+          this.tail = newNode;
+          this.length++;
+        }
+
+        prepend(value) {
+          //  *     *  <->  *  <->  * 
+          //  n     h               t
+          let newNode = {
+            value,
+            next: null,
+            previous: null
+          };
+          //  *   ->  *  <->  *  <->  * 
+          //  n       h               t
+          newNode.next = this.head;
+          //  *  <->  *  <->  *  <->  * 
+          //  n       h               t
+          this.head.previous = newNode;
+          //  *  <->  *  <->  *  <->  * 
+          //  n,h                     t
+          this.head = newNode;
+          this.length++;
+        }
+
+        insert(index, value) {
+          let newNode = {
+            value,
+            next: null,
+            previous: null
+          };
+          
+          // (0)     (1)     (2)     (3)
+          //  *  <->  *  <->  *  <->  *     
+          //          p       c             index = 2
+          let previousNode = this.head.previous;
+          let currentNode = this.head;
+          for (let i = 0; i < index; i++) {
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+          }
+          //  *  <->  *   ->  *  <->  *     
+          //                /               index = 2
+          //              n
+          newNode.next = currentNode;
+          currentNode.previous = newNode;
+          //  *  <->  *      *  <->  *     
+          //            \   /               index = 2
+          //              n
+          previousNode.next = newNode;
+          newNode.previous = previousNode;
+
+          this.length++;
+          // console.log(this);
+        }
+
+        remove(index) {
+          let currentNode = this.head;
+          for (let i = 0; i < index; i++) {
+            currentNode = currentNode.next;
+          }
+          currentNode.previous.next = currentNode.next;
+          currentNode.next.previous = currentNode.previous;
+          this.length--;
+        }
+
+        printList() {
+          let linkedListValueArray = []
+          let currentNode = this.head;
+          while(currentNode) {
+            linkedListValueArray.push(currentNode.value);
+            currentNode = currentNode.next;
+          }
+          return linkedListValueArray.join(' -> ');
+        }
+      }
+
+      let doublyLinkedList = new DoublyLinkedList(10);
+      doublyLinkedList.append(5);
+      doublyLinkedList.prepend(1);
+      doublyLinkedList.prepend(13);
+      doublyLinkedList.insert(2, 99);
+      doublyLinkedList.remove(3);
+
+      document.querySelector('#list').innerHTML = doublyLinkedList.printList();
+
+      // document.querySelector("#root").innerHTML = JSON.stringify(
+      //   doublyLinkedList,
+      //   null,
+      //   2
+      // );
+    </script>
+  </body>
+</html>
