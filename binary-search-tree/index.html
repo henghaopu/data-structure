@@ -7,6 +7,10 @@
     <title>Binary Search Tree</title>
   </head>
   <body>
+    <pre id="root">
+
+    </pre>
+
     <script>
       class Node {
         constructor(value) {
@@ -21,9 +25,47 @@
           this.root = null;
         }
 
-        insert(value) {}
+        insert(value) {
+          const newNode = new Node(value);
+          if (this.root === null) {
+            this.root = newNode;
+             return;
+          } else {
+            let currentNode = this.root;
+            while (currentNode) {
+              if (newNode.value < currentNode.value) {
+                if (!currentNode.left){
+                  currentNode.left = newNode;
+                  return;
+                } else {
+                  currentNode = currentNode.left;
+                }
+              } else {
+                if (!currentNode.right) {
+                  currentNode.right = newNode;
+                  return;
+                } else {
+                  currentNode = currentNode.right;
+                }
+              }
+            }
+          }
+          
+        }
 
-        lookup(value) {}
+        lookup(value) {
+          let currentNode = this.root;
+          while (currentNode) {
+            if (value === currentNode.value) {
+              return currentNode;
+            } else if (value < currentNode.value) {
+              currentNode = currentNode.left;
+            } else {
+              currentNode = currentNode.right;
+            }
+          }
+          return null;
+        }
       }
 
       //       9
@@ -37,6 +79,11 @@
       bst.insert(170);
       bst.insert(15);
       bst.insert(1);
+      console.log(bst);
+      document.querySelector('#root').innerHTML = JSON.stringify(traverse(bst.root), null, 2);
+      
+      console.log(bst.lookup(170));
+      console.log(bst.lookup(171));
 
       function traverse(node) {
         const tree = { value: node.value };
