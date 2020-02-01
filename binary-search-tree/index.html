@@ -33,27 +33,33 @@
           } else {
             let currentNode = this.root;
             while (currentNode) {
+              //     *
+              //    /
+              //   *
               if (newNode.value < currentNode.value) {
                 if (!currentNode.left){
                   currentNode.left = newNode;
                   return;
-                } else {
-                  currentNode = currentNode.left;
                 }
+                currentNode = currentNode.left;
               } else {
+                //     *
+                //      \
+                //       *
                 if (!currentNode.right) {
                   currentNode.right = newNode;
                   return;
-                } else {
-                  currentNode = currentNode.right;
-                }
+                } 
+                currentNode = currentNode.right;
               }
             }
           }
-          
         }
 
         lookup(value) {
+          if (!this.root) {
+            return null;
+          }
           let currentNode = this.root;
           while (currentNode) {
             if (value === currentNode.value) {
@@ -84,6 +90,7 @@
       
       console.log(bst.lookup(170));
       console.log(bst.lookup(171));
+      console.log(bst.lookup(4));
 
       function traverse(node) {
         const tree = { value: node.value };
