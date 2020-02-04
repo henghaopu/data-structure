@@ -33,12 +33,22 @@
           this.data[address].push([key, value]);
         }
       }
+
+      get(key) {
+        const address = this._hash(key);
+        const arrayOfKeyValuePairsWithTheSameAddress = this.data[address];
+        for (let i = 0; i < arrayOfKeyValuePairsWithTheSameAddress.length; i++) {
+          if (arrayOfKeyValuePairsWithTheSameAddress[i][0] === key) {
+            return arrayOfKeyValuePairsWithTheSameAddress[i][1];
+          }
+        }
+      }
     }
 
     const hashTable = new HashTable(50);
     hashTable.set('grapes', 10000);
     hashTable.set('grapes', 10000);
-    // console.log(hashTable.get('grapes'));
+    console.log(hashTable.get('grapes'));
 
     console.log(hashTable.data);
   </script>
