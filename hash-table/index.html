@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Hash Table</title>
-</head>
-<body>
-  
-
-  <script>
-    class HashTable {
-      constructor(size) {
-        this.data = new Array(size);
-      }
-
-      // key -> address 
-      _hash(key) {
-        let hash = 0;
-        for (let i = 0; i < key.length; i++) {
-          hash = (hash + key.charCodeAt(i) * i);
-        }  
-        hash = hash % this.data.length;
-        return hash;
-      }
-
-      set(key, value) {
-        const address = this._hash(key);
-        if (!this.data[address]) {
-          this.data[address] = [];
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Hash Table</title>
+  </head>
+  <body>
+    <script>
+      class HashTable {
+        constructor(size) {
+          this.data = new Array(size);
         }
-        this.data[address].push([key, value]); 
-      }
 
-      get(key) {
-        const address = this._hash(key);
-        const arrayOfKeyValuePairsWithTheSameAddress = this.data[address];
-        for (let i = 0; i < arrayOfKeyValuePairsWithTheSameAddress.length; i++) {
-          if (arrayOfKeyValuePairsWithTheSameAddress[i][0] === key) {
-            return arrayOfKeyValuePairsWithTheSameAddress[i][1];
+        // key -> address
+        _hash(key) {
+          let hash = 0;
+          for (let i = 0; i < key.length; i++) {
+            hash = hash + key.charCodeAt(i) * i;
+          }
+          hash = hash % this.data.length;
+          return hash;
+        }
+
+        set(key, value) {
+          const address = this._hash(key);
+          if (!this.data[address]) {
+            this.data[address] = [];
+          }
+          this.data[address].push([key, value]);
+        }
+
+        get(key) {
+          const address = this._hash(key);
+          const arrayOfKeyValuePairsWithTheSameAddress = this.data[address];
+          if (arrayOfKeyValuePairsWithTheSameAddress) {
+            for (
+              let i = 0;
+              i < arrayOfKeyValuePairsWithTheSameAddress.length;
+              i++
+            ) {
+              if (arrayOfKeyValuePairsWithTheSameAddress[i][0] === key) {
+                return arrayOfKeyValuePairsWithTheSameAddress[i][1];
+              }
+            }
+          } else {
+            return null;
           }
         }
       }
-    }
 
-    const hashTable = new HashTable(50);
-    hashTable.set('grapes', 10000);
-    hashTable.set('grapes', 10000);
-    console.log(hashTable.get('grapes'));
+      const hashTable = new HashTable(50);
+      hashTable.set("grapes", 10000);
+      hashTable.set("grapes", 10000);
+      console.log(hashTable.get("apple"));
 
-    console.log(hashTable.data);
-  </script>
-</body>
+      console.log(hashTable.data);
+    </script>
+  </body>
 </html>
