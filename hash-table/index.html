@@ -28,10 +28,9 @@
       set(key, value) {
         const address = this._hash(key);
         if (!this.data[address]) {
-          this.data[address] = [[key, value]];
-        } else {
-          this.data[address].push([key, value]);
+          this.data[address] = [];
         }
+        this.data[address].push([key, value]); 
       }
 
       get(key) {
