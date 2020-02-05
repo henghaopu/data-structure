@@ -48,13 +48,27 @@
             return null;
           }
         }
+
+        // [..., [['grapes', 10000], ['XXX, 123'], ,,,], [[apple, 85]], ...]
+        keys() {
+          const keys = [];
+          for (let i = 0; i < this.data.length; i++) {
+            if (this.data[i]) {
+              for (let j = 0; j < this.data[i].length; j++) {
+                keys.push(this.data[i][j][0]);
+              }
+            }
+          }
+          return keys;
+        }
       }
 
       const hashTable = new HashTable(50);
       hashTable.set("grapes", 10000);
-      hashTable.set("grapes", 10000);
+      hashTable.set("abc", 123);
+      hashTable.set("apple", 85);
       console.log(hashTable.get("apple"));
-
+      console.log(hashTable.keys());
       console.log(hashTable.data);
     </script>
   </body>
