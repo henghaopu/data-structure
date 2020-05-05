@@ -14,6 +14,26 @@ class SinglyLinkedList {
     this.tail = null;
     this.length = 0;
   }
+
+  push(val) {
+    const newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      // redundant 
+      // if (!this.head.next) {
+      //   this.head.next = newNode;
+      //   this.tail = newNode;
+      // }
+      this.tail.next = newNode;
+      this.tail = newNode; 
+    }
+    this.length++;
+    return this;
+  }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
+singlyLinkedList.push(1);
+console.log(singlyLinkedList.push(2));
