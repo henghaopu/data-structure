@@ -31,17 +31,9 @@ class SinglyLinkedList {
   pop() {
     // edge case 1: no node
     if (!this.length) return null;
-    // edge case 2: one node
-    if (this.length === 1) {
-      let temp = this.tail;
-      this.head = null;
-      this.tail = null;
-      this.length--;
-      return temp;
-    }
     // general case
     let current = this.head;
-    let previous = null;
+    let previous = this.head;
     while (current !== this.tail) {
       previous = current;
       current = current.next;
@@ -50,6 +42,11 @@ class SinglyLinkedList {
     this.tail = previous;
     this.tail.next = null;
     this.length--;
+    // edge case 2: one node
+    if(!this.length) {
+      this.head = null;
+      this.tail = null;
+    }
     return current;
   }
 }
