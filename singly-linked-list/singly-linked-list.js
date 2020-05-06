@@ -31,6 +31,7 @@ class SinglyLinkedList {
   pop() {
     // edge case 1: no node
     if (!this.length) return null;
+
     // general case
     let current = this.head;
     let previous = this.head;
@@ -42,12 +43,26 @@ class SinglyLinkedList {
     this.tail = previous;
     this.tail.next = null;
     this.length--;
-    // edge case 2: one node
+
+    // edge case 2: initially one node
     if(!this.length) {
       this.head = null;
       this.tail = null;
     }
+
     return current;
+  }
+  shift() {
+    //edge case: no node
+    if (!this.length) return null;
+    // general case
+    let shiftedNode = this.head;
+    this.head = this.head.next;
+    this.length--;
+    // edge case: initial one node
+    if (!this.length) this.tail = null;
+
+    return shiftedNode;
   }
 }
 
@@ -55,7 +70,7 @@ const singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.push(1);
 singlyLinkedList.push(2);
 singlyLinkedList.push(3);
-console.log(singlyLinkedList.pop());
-console.log(singlyLinkedList.pop());
-console.log(singlyLinkedList.pop());
+console.log(singlyLinkedList.shift());
+console.log(singlyLinkedList.shift());
+console.log(singlyLinkedList.shift());
 console.log(singlyLinkedList)
