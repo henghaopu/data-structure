@@ -119,12 +119,26 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    // edge cases
+    if (index < 0 || index >= this.length) return null;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    let previousNode = this.get(index - 1);
+    let removingNode = previousNode.next;
+    previousNode.next = previousNode.next.next;
+    this.length--;
+    return removingNode;
+  }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.push(1);
 singlyLinkedList.push(2);
-console.log(singlyLinkedList.insert(-1,"!"));
+singlyLinkedList.push(3);
+console.log(singlyLinkedList.remove(1));
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
