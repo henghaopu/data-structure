@@ -78,12 +78,28 @@ class SinglyLinkedList {
 
     this.length++;
   }
+
+  // retrive a node by its position in the linked list
+  get(index) {
+    // edge case: check if index is valid
+    if (index < 0 || index >= this.length) return null;
+    // general case
+    let counter = 0;
+    let currentNode = this.head;
+    while(counter !== index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+    
+    return currentNode;
+  }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
-singlyLinkedList.unshift(1);
-// singlyLinkedList.push(2);
-// singlyLinkedList.push(3);
+singlyLinkedList.push(1);
+singlyLinkedList.push(2);
+singlyLinkedList.push(3);
+console.log(singlyLinkedList.get(1));
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
