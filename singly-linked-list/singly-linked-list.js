@@ -102,14 +102,30 @@ class SinglyLinkedList {
     } 
     return false;
   }
+
+  insert(index, val) {
+    // edge case: check if index is valid
+    if (index < 0 || index > this.length) return false;
+    // edge case: most right
+    if (index === this.length) return !!this.push(val);
+    // edge case: most left
+    if (index === 0) return !!this.unshift(val);
+
+    let newNode = new Node(val);
+    let previousNode = this.get(index - 1);
+    let temp = previousNode.next;
+    previousNode.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    return true;
+  }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.push(1);
 singlyLinkedList.push(2);
-singlyLinkedList.push(3);
-console.log(singlyLinkedList.set(1,"!"));
+console.log(singlyLinkedList.insert(-1,"!"));
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
-console.log(singlyLinkedList.get(1))
+console.log(singlyLinkedList)
