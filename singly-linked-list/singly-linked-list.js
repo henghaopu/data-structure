@@ -64,13 +64,27 @@ class SinglyLinkedList {
 
     return shiftedNode;
   }
+  unshift(val) {
+    let newNode = new Node(val);
+    // edge case: no node
+    if (!this.length) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      //general case
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+  }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
-singlyLinkedList.push(1);
-singlyLinkedList.push(2);
-singlyLinkedList.push(3);
-console.log(singlyLinkedList.shift());
-console.log(singlyLinkedList.shift());
-console.log(singlyLinkedList.shift());
+singlyLinkedList.unshift(1);
+// singlyLinkedList.push(2);
+// singlyLinkedList.push(3);
+// console.log(singlyLinkedList.shift());
+// console.log(singlyLinkedList.shift());
+// console.log(singlyLinkedList.shift());
 console.log(singlyLinkedList)
