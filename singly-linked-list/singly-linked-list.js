@@ -90,8 +90,17 @@ class SinglyLinkedList {
       currentNode = currentNode.next;
       counter++;
     }
-    
+
     return currentNode;
+  }
+
+  set(index, val) {
+    let chosenNode = this.get(index);
+    if (chosenNode) {
+      chosenNode.val = val;
+      return true;
+    } 
+    return false;
   }
 }
 
@@ -99,8 +108,8 @@ const singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.push(1);
 singlyLinkedList.push(2);
 singlyLinkedList.push(3);
-console.log(singlyLinkedList.get(1));
+console.log(singlyLinkedList.set(1,"!"));
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
-console.log(singlyLinkedList)
+console.log(singlyLinkedList.get(1))
