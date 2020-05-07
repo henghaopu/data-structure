@@ -132,14 +132,34 @@ class SinglyLinkedList {
     this.length--;
     return removingNode;
   }
+
+  reverse() {
+    // swap head and tail
+    [this.head, this.tail] = [this.tail, this.head];
+    // initialize pointers
+    let previous = null;
+    let current = this.tail;
+    let next = current.next;
+    // loop through current
+    for (let i = 0; i < this.length; i++) {
+      // connect 
+      current.next = previous;
+      // update/move forward pointers for next iteration (start from previous beacuse we will abandon the value of previous)
+      previous = current;
+      current = next;
+      next = current ? current.next : null;
+    }
+
+    return this;
+  }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.push(1);
 singlyLinkedList.push(2);
 singlyLinkedList.push(3);
-console.log(singlyLinkedList.remove(1));
+console.log(singlyLinkedList.reverse());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
-console.log(singlyLinkedList)
+// console.log(singlyLinkedList)
