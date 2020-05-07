@@ -1,3 +1,7 @@
+// * A singly linked list is good at shift/unshift because of the head pointer.
+// * Also, it is good at push because of the tail pointer.
+// * So, it seems like an efficient option to be used to implement a queue with push(enqueue) and shift(dequeue).
+
  // Linked list consist of nodes, and each node has a value and a pointer to another node or null
  class Node {
    constructor(val) {
@@ -14,7 +18,7 @@ class SinglyLinkedList {
     this.tail = null;
     this.length = 0;
   }
-
+  // insertion: O(1)
   push(val) {
     const newNode = new Node(val);
     if (!this.head) {
@@ -27,7 +31,7 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
-
+  // removal from the end: O(n)
   pop() {
     // edge case 1: no node
     if (!this.length) return null;
@@ -52,6 +56,7 @@ class SinglyLinkedList {
 
     return current;
   }
+  // removal from the beginning: O(1)
   shift() {
     //edge case: no node
     if (!this.length) return null;
@@ -64,6 +69,7 @@ class SinglyLinkedList {
 
     return shiftedNode;
   }
+  // insertion: O(1)
   unshift(val) {
     let newNode = new Node(val);
     // edge case: no node
@@ -79,6 +85,7 @@ class SinglyLinkedList {
     this.length++;
   }
 
+  // search/access: O(n)
   // retrive a node by its position in the linked list
   get(index) {
     // edge case: check if index is valid
@@ -102,7 +109,7 @@ class SinglyLinkedList {
     } 
     return false;
   }
-
+  
   insert(index, val) {
     // edge case: check if index is valid
     if (index < 0 || index > this.length) return false;
@@ -132,14 +139,34 @@ class SinglyLinkedList {
     this.length--;
     return removingNode;
   }
+
+  reverse() {
+    // swap head and tail
+    [this.head, this.tail] = [this.tail, this.head];
+    // initialize pointers
+    let previous = null;
+    let current = this.tail;
+    let next = current.next;
+    // loop through current
+    for (let i = 0; i < this.length; i++) {
+      // connect 
+      current.next = previous;
+      // update/move forward pointers for next iteration (start from previous beacuse we will abandon the value of previous)
+      previous = current;
+      current = next;
+      next = current ? current.next : null;
+    }
+
+    return this;
+  }
 }
 
 const singlyLinkedList = new SinglyLinkedList();
 singlyLinkedList.push(1);
 singlyLinkedList.push(2);
 singlyLinkedList.push(3);
-console.log(singlyLinkedList.remove(1));
+console.log(singlyLinkedList.reverse());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
 // console.log(singlyLinkedList.shift());
-console.log(singlyLinkedList)
+// console.log(singlyLinkedList)
