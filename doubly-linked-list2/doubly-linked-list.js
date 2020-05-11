@@ -90,7 +90,6 @@ class DoublyLinkedList {
     let counter;
     let current;
     if (index <= this.length / 2) {
-      console.log('working from start')
       counter = 0;
       current = this.head;
       while (counter !== index) {
@@ -98,7 +97,6 @@ class DoublyLinkedList {
         counter++;
       }
     } else {
-      console.log('working from end')
       counter = this.length - 1;
       current = this.tail;
       while (counter !== index) {
@@ -110,6 +108,15 @@ class DoublyLinkedList {
     current.next = null;
     return current;
   }
+
+  set(index, val) {
+    const chosenNode = this.get(index);
+    if (chosenNode) {
+      chosenNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 const list = new DoublyLinkedList();
@@ -118,5 +125,5 @@ list.push(2);
 list.push(3);
 list.push(4);
 list.push(5);
-console.log(list.get(0))
+console.log(list.set(0))
 // console.log(list)
