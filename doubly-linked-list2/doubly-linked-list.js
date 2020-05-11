@@ -153,6 +153,17 @@ class DoublyLinkedList {
     this.length--;
     return chosenNode;
   }
+
+  reverse() {
+    let current = this.head;
+    for (let i = 0; i < this.length; i++) {
+        [current.prev, current.next] = [current.next, current.prev]
+        current = current.prev
+    }
+    [this.head, this.tail] = [this.tail, this.head]
+    
+    return this
+  }
 }
 
 const list = new DoublyLinkedList();
@@ -161,5 +172,5 @@ list.push(2);
 list.push(3);
 list.push(4);
 list.push(5);
-console.log(list.remove(4))
+console.log(list.reverse())
 console.log(list)
