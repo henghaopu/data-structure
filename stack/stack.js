@@ -23,8 +23,7 @@ class Stack {
       this.top = newNode;
     }
   
-    this.size++;
-    return this.size
+    return ++this.size
   }
 }
 
