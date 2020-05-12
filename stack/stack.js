@@ -25,9 +25,25 @@ class Stack {
   
     return ++this.size
   }
+
+  // same like shift in singly linked list
+  pop() {
+    // edge case: x node
+    if (!this.size) return null;
+    // edge case: 1 node and  general case are the same
+    let poppingNode = this.top;
+    this.top = this.top.next;
+    this.size--;
+    return poppingNode.val;
+  }
 }
 
 let stack = new Stack();
 console.log(stack.push(1))
 console.log(stack.push(2))
 console.log(stack.push(3))
+console.log(stack.pop())
+console.log(stack.pop())
+console.log(stack.pop())
+console.log(stack.pop())
+
