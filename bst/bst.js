@@ -28,17 +28,15 @@ class BST {
         if (!current.left) {
           current.left = newNode;
           return this;
-        } else {
-          current = current.left;
-        }
+        } 
+        current = current.left;
       } else if (val > current.val) {
         // go right
         if (!current.right) {
           current.right = newNode;
           return this;
-        } else {
-          current = current.right;
-        }
+        } 
+        current = current.right;
       } else {
         return null;
       }
