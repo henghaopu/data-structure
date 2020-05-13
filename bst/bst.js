@@ -44,21 +44,13 @@ class BST {
   }
 
   search(val) {
-    // base case: no node
-    if (!this.root) return false;
     let current = this.root;
-    while (true) {
-      if (val === current.val) return true
-      else {
-        if (val < current.val) {
-          if (current.left) current = current.left
-          else return false
-        } else {
-          if (current.right) current = current.right
-          else return false
-        }
-      }
+    while (current) {
+      if (val === current.val) return current
+      else if (val < current.val) current = current.left;
+      else current = current.right;
     }
+    return null;
   }
 }
 
