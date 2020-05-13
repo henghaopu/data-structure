@@ -42,6 +42,24 @@ class BST {
       }
     }
   }
+
+  search(val) {
+    // base case: no node
+    if (!this.root) return false;
+    let current = this.root;
+    while (true) {
+      if (val === current.val) return true
+      else {
+        if (val < current.val) {
+          if (current.left) current = current.left
+          else return false
+        } else {
+          if (current.right) current = current.right
+          else return false
+        }
+      }
+    }
+  }
 }
 
 const bst = new BST()
@@ -52,4 +70,7 @@ bst.insert(11)
 bst.insert(8)
 bst.insert(5)
 bst.insert(3)
-console.log(bst)
+console.log(bst.search(3))
+console.log(bst.search(2))
+console.log(bst.search(17))
+console.log(bst.search(18))
