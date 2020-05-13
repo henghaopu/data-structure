@@ -14,6 +14,8 @@ class BST {
   //      10
   //    5     13
   //   3 8  11  17
+  
+  // best & avaerage time: O(log n); worse case: O(n)
   insert(val) {
     const newNode = new Node(val);
     // edge case: no node 
@@ -42,7 +44,7 @@ class BST {
       }
     }
   }
-
+  // best & averabe time: O(log n);  worse case: O(n)
   search(val) {
     let current = this.root;
     while (current) {
