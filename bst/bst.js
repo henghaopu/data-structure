@@ -14,30 +14,30 @@ class BST {
   //      10
   //    5     13
   //   3 8  11  17
-  
+
   // best & avaerage time: O(log n); worse case: O(n)
   insert(val) {
     const newNode = new Node(val);
-    // edge case: no node 
+    // edge case: no node
     if (!this.root) {
       this.root = newNode;
       return this;
-    } 
+    }
     let current = this.root;
-    while(true) {
+    while (true) {
       // go left
       if (val < current.val) {
         if (!current.left) {
           current.left = newNode;
           return this;
-        } 
+        }
         current = current.left;
       } else if (val > current.val) {
         // go right
         if (!current.right) {
           current.right = newNode;
           return this;
-        } 
+        }
         current = current.right;
       } else {
         return null;
@@ -48,23 +48,32 @@ class BST {
   search(val) {
     let current = this.root;
     while (current) {
-      if (val === current.val) return current
+      if (val === current.val) return current;
       else if (val < current.val) current = current.left;
       else current = current.right;
     }
     return null;
   }
+
+  bfs() {
+    let visited = [];
+    let queue = [this.root];
+    while (queue.length) {
+      const shiftedNode = queue.shift();
+      if (shiftedNode.left) queue.push(shiftedNode.left);
+      if (shiftedNode.right) queue.push(shiftedNode.right);
+      visited.push(shiftedNode.val);
+    }
+    return visited;
+  }
 }
 
-const bst = new BST()
-bst.insert(10)
-bst.insert(13)
-bst.insert(17)
-bst.insert(11)
-bst.insert(8)
-bst.insert(5)
-bst.insert(3)
-console.log(bst.search(3))
-console.log(bst.search(2))
-console.log(bst.search(17))
-console.log(bst.search(18))
+const bst = new BST();
+bst.insert(10);
+bst.insert(13);
+bst.insert(17);
+bst.insert(11);
+bst.insert(5);
+bst.insert(8);
+bst.insert(3);
+console.log(bst.bfs());
