@@ -66,6 +66,18 @@ class BST {
     }
     return visited;
   }
+
+  dfsPreOrder() {
+    let visited = [];
+
+    (function visit(node) {
+      visited.push(node.val);
+      if (node.left) visit(node.left);
+      if (node.right) visit(node.right);
+    })(this.root);
+
+    return visited;
+  }
 }
 
 const bst = new BST();
@@ -76,4 +88,5 @@ bst.insert(11);
 bst.insert(5);
 bst.insert(8);
 bst.insert(3);
-console.log(bst.bfs());
+// console.log(bst.bfs());
+console.log(bst.dfsPreOrder());
