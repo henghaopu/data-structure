@@ -78,6 +78,17 @@ class BST {
 
     return visited;
   }
+
+  dfsPostOrder() {
+    const visited = [];
+    (function visit(node) {
+      if (node.left) visit(node.left);
+      if (node.right) visit(node.right);
+      visited.push(node.val);
+    })(this.root);
+
+    return visited;
+  }
 }
 
 const bst = new BST();
@@ -89,4 +100,4 @@ bst.insert(5);
 bst.insert(8);
 bst.insert(3);
 // console.log(bst.bfs());
-console.log(bst.dfsPreOrder());
+console.log(bst.dfsPostOrder());
