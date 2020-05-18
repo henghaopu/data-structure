@@ -82,6 +82,8 @@ class BST {
   dfsPostOrder() {
     const visited = [];
     (function visit(node) {
+      if (node.left) visit(node.left);
+      if (node.right) visit(node.right);
       visited.push(node.val);
     })(this.root);
 
