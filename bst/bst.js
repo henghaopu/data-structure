@@ -67,6 +67,20 @@ class BST {
     return visited;
   }
 
+  dfsPreorderIterative() {
+    let visited = [];
+    let stack = [this.root]; // Spcae: O(n)
+    // Time: O(n)
+    while (stack.length) {
+      const poppedNode = stack.pop();
+      visited.push(poppedNode.val);
+      if (poppedNode.right) stack.push(poppedNode.right);
+      if (poppedNode.left) stack.push(poppedNode.left);
+    }
+
+    return visited;
+  }
+
   dfsPreOrder() {
     let visited = [];
 
@@ -99,5 +113,7 @@ bst.insert(11);
 bst.insert(5);
 bst.insert(8);
 bst.insert(3);
-// console.log(bst.bfs());
+console.log(bst.bfs());
+console.log(bst.dfsPreorderIterative());
+console.log(bst.dfsPreOrder());
 console.log(bst.dfsPostOrder());
