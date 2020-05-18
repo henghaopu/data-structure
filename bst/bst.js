@@ -81,6 +81,7 @@ class BST {
     return visited;
   }
 
+  // pros: first node is the root node, so it's good for storing the data in db and then reconstructing the tree from it
   dfsPreOrder() {
     let visited = [];
 
@@ -103,6 +104,18 @@ class BST {
 
     return visited;
   }
+  // pros:
+  dfsInOrder() {
+    const visited = [];
+
+    (function visit(node) {
+      if (node.left) visit(node.left);
+      visited.push(node.val);
+      if (node.right) visit(node.right);
+    })(this.root);
+
+    return visited;
+  }
 }
 
 const bst = new BST();
@@ -113,7 +126,6 @@ bst.insert(11);
 bst.insert(5);
 bst.insert(8);
 bst.insert(3);
-console.log(bst.bfs());
-console.log(bst.dfsPreorderIterative());
-console.log(bst.dfsPreOrder());
-console.log(bst.dfsPostOrder());
+
+console.log(bst.dfsPreOrder()); // [10,5,3,8,13,11,17]
+console.log(bst.dfsInOrder()); // [3,5,8,10,11,12,17]
