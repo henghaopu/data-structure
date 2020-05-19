@@ -10,7 +10,7 @@ class Node {
 // min binary heap
 class PriorityQueue {
   heap = [];
-
+  // O(log n)
   enqueue(val, priority) {
     this.heap.push(new Node(val, priority));
     let current = this.heap.length - 1;
@@ -28,6 +28,7 @@ class PriorityQueue {
 
     return this.heap;
   }
+  // O(log n)
   // extractMin
   dequeue() {
     // edge case: x node
