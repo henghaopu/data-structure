@@ -42,7 +42,9 @@ class MaxBinaryHeap {
       // if no child
       if (!leftChild && !rightChild) break;
       // when either one exist
-      let max = this.heap.indexOf(Math.max(leftChild, rightChild));
+      let max;
+      leftChild > rightChild ? (max = left) : (max = right);
+      // let max = this.heap.indexOf(Math.max(leftChild, rightChild));
       // no swap & end the loop
       if (this.heap[max] < this.heap[current]) break;
       // swap (update heap)
