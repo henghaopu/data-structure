@@ -1,6 +1,6 @@
 class MaxBinaryHeap {
   heap = [];
-
+  // O(log n)
   insert(val) {
     this.heap.push(val);
     let current = this.heap.length - 1;
@@ -18,7 +18,7 @@ class MaxBinaryHeap {
 
     return this.heap;
   }
-
+  // O(log n)
   extractMax() {
     // edge case: x node
     if (!this.heap.length) return null;
