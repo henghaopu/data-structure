@@ -3,20 +3,17 @@ class MaxBinaryHeap {
 
   insert(val) {
     this.heap.push(val);
-    if (this.heap.length) {
-      let current = this.heap.length - 1;
-      while (current >= 0) {
-        let parent = Math.floor((current - 1) / 2);
-        if (this.heap[current] > this.heap[parent]) {
-          [this.heap[current], this.heap[parent]] = [
-            this.heap[parent],
-            this.heap[current],
-          ];
-          current = parent;
-        } else {
-          break;
-        }
-      }
+    let current = this.heap.length - 1;
+    while (current > 0) {
+      let parent = Math.floor((current - 1) / 2);
+      if (this.heap[current] <= this.heap[parent]) break;
+      // swap the values
+      [this.heap[current], this.heap[parent]] = [
+        this.heap[parent],
+        this.heap[current],
+      ];
+      // update the loop
+      current = parent;
     }
 
     return this.heap;
