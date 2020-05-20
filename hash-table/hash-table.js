@@ -1,3 +1,5 @@
+// In general, Insert: O(1), Delete: O(1), Access: O(1)
+
 class HashTable {
   // default to a prime number to reduce the collision
   // default an empty array to every address to solve collision via separate chaining and also makes code more succinct
@@ -19,11 +21,13 @@ class HashTable {
     return hash;
   }
 
+  // O(1)
   set(key, value) {
     const address = this._hash(key);
     this.data[address].push([key, value]);
   }
 
+  // Best case time: O(1), Worst case time: O(n)
   get(key) {
     const address = this._hash(key);
     // subarray = arrayOfKeyValuePairsWithTheSameAddress
