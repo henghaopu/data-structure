@@ -28,6 +28,16 @@ class Graph {
       this.adjacencyList[v2] = this.adjacencyList[v2].filter((v) => v !== v1);
     }
   }
+
+  removeVertex(vertex) {
+    if (this.adjacencyList.hasOwnProperty(vertex)) {
+      const adjacentVertices = this.adjacencyList[vertex];
+      for (let i = 0; i < adjacentVertices.length; i++) {
+        this.removeEdge(vertex, adjacentVertices[i]);
+      }
+      delete this.adjacencyList[vertex];
+    }
+  }
 }
 
 const graph = new Graph();
@@ -64,6 +74,6 @@ graph.addEdge('Nairobi', 'Bogotá');
 
 console.log(graph.adjacencyList);
 
-graph.removeEdge('Moscow', 'Denver');
+graph.removeVertex('Moscow');
 
 console.log(graph.adjacencyList);
