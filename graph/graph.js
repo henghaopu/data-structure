@@ -81,23 +81,25 @@ class Graph {
   }
 
   breadthFirstIterative(start) {
-    const visited = {};
-    const queue = [start];
+    const enqueued = {};
+    const queue = [];
+    queue.push(start);
+    enqueued[start] = true;
 
     while (queue.length) {
       console.log(queue);
       // dequeue
       let currentVertex = queue.shift();
-      // visited dequeued vertex
-      if (!visited[currentVertex]) visited[currentVertex] = true;
       // enqueue neighbors
       this.adjacencyList[currentVertex].forEach((neighbor) => {
-        if (!visited[neighbor] && !queue.includes(neighbor))
+        if (!enqueued[neighbor]) {
           queue.push(neighbor);
+          enqueued[neighbor] = true;
+        }
       });
     }
 
-    return Object.keys(visited);
+    return Object.keys(enqueued);
   }
 }
 
