@@ -60,6 +60,25 @@ class Graph {
 
     return Object.keys(visited);
   }
+
+  depthFirstIterative(start) {
+    const visited = {};
+    const stack = [start];
+
+    while (stack.length) {
+      console.log(stack);
+      // pop
+      let currentVertex = stack.pop();
+      // visit popped
+      if (!visited[currentVertex]) visited[currentVertex] = true;
+      // store popped vertex's neighbors
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) stack.push(neighbor);
+      });
+    }
+
+    return Object.keys(visited);
+  }
 }
 
 const g = new Graph();
@@ -87,41 +106,4 @@ g.addEdge('E', 'F');
 //            F
 
 console.log(g.depthFirstRecursive('A'));
-
-// const graph = new Graph();
-// graph.addVertex('The Professor');
-// graph.addVertex('Tokyo');
-// graph.addVertex('Rio');
-// graph.addVertex('Nairobi');
-// graph.addVertex('Berlin');
-// graph.addVertex('Moscow');
-// graph.addVertex('Denver');
-// graph.addVertex('Stockholm');
-// graph.addVertex('Helsinki');
-// graph.addVertex('Lisbon');
-// graph.addVertex('Palermo');
-// graph.addVertex('Bogotá');
-// graph.addVertex('Marseille');
-// graph.addVertex('Manila');
-
-// graph.addEdge('The Professor', 'Berlin');
-// graph.addEdge('Berlin', 'Palermo');
-// graph.addEdge('The Professor', 'Lisbon');
-// graph.addEdge('The Professor', 'Marseille');
-
-// graph.addEdge('Tokyo', 'Rio');
-// graph.addEdge('Rio', 'Denver');
-// graph.addEdge('Denver', 'Stockholm');
-// graph.addEdge('Denver', 'Moscow');
-// graph.addEdge('Denver', 'Manila');
-// graph.addEdge('Moscow', 'Manila');
-
-// graph.addEdge('Tokyo', 'Nairobi');
-// graph.addEdge('Nairobi', 'Helsinki');
-// graph.addEdge('Nairobi', 'Bogotá');
-
-// console.log(graph.adjacencyList);
-
-// graph.removeVertex('Moscow');
-
-// console.log(graph.adjacencyList);
+console.log(g.depthFirstIterative('A'));
