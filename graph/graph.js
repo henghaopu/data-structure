@@ -38,42 +38,90 @@ class Graph {
       delete this.adjacencyList[vertex];
     }
   }
+
+  depthFirstRecursive(start) {
+    const visited = {};
+    // can't use this in visit function declaration
+    const adjacencyList = this.adjacencyList;
+
+    (function visit(vertex) {
+      // error handling
+      if (!vertex) return null;
+
+      // put the node into visited map
+      visited[vertex] = true;
+      // loop over all the neighbors
+      adjacencyList[vertex].forEach((neighbor) => {
+        // if this neighbor haven't been visited, visit it
+        if (!visited[neighbor]) return visit(neighbor);
+        // base case: do nothing if the neighbor have been visited
+      });
+    })(start);
+
+    return Object.keys(visited);
+  }
 }
 
-const graph = new Graph();
-graph.addVertex('The Professor');
-graph.addVertex('Tokyo');
-graph.addVertex('Rio');
-graph.addVertex('Nairobi');
-graph.addVertex('Berlin');
-graph.addVertex('Moscow');
-graph.addVertex('Denver');
-graph.addVertex('Stockholm');
-graph.addVertex('Helsinki');
-graph.addVertex('Lisbon');
-graph.addVertex('Palermo');
-graph.addVertex('Bogotá');
-graph.addVertex('Marseille');
-graph.addVertex('Manila');
+const g = new Graph();
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addVertex('D');
+g.addVertex('E');
+g.addVertex('F');
 
-graph.addEdge('The Professor', 'Berlin');
-graph.addEdge('Berlin', 'Palermo');
-graph.addEdge('The Professor', 'Lisbon');
-graph.addEdge('The Professor', 'Marseille');
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
 
-graph.addEdge('Tokyo', 'Rio');
-graph.addEdge('Rio', 'Denver');
-graph.addEdge('Denver', 'Stockholm');
-graph.addEdge('Denver', 'Moscow');
-graph.addEdge('Denver', 'Manila');
-graph.addEdge('Moscow', 'Manila');
+//            A
+//          /   \
+//         B     C
+//         |     |
+//         D  -- E
+//          \   /
+//            F
 
-graph.addEdge('Tokyo', 'Nairobi');
-graph.addEdge('Nairobi', 'Helsinki');
-graph.addEdge('Nairobi', 'Bogotá');
+console.log(g.depthFirstRecursive('A'));
 
-console.log(graph.adjacencyList);
+// const graph = new Graph();
+// graph.addVertex('The Professor');
+// graph.addVertex('Tokyo');
+// graph.addVertex('Rio');
+// graph.addVertex('Nairobi');
+// graph.addVertex('Berlin');
+// graph.addVertex('Moscow');
+// graph.addVertex('Denver');
+// graph.addVertex('Stockholm');
+// graph.addVertex('Helsinki');
+// graph.addVertex('Lisbon');
+// graph.addVertex('Palermo');
+// graph.addVertex('Bogotá');
+// graph.addVertex('Marseille');
+// graph.addVertex('Manila');
 
-graph.removeVertex('Moscow');
+// graph.addEdge('The Professor', 'Berlin');
+// graph.addEdge('Berlin', 'Palermo');
+// graph.addEdge('The Professor', 'Lisbon');
+// graph.addEdge('The Professor', 'Marseille');
 
-console.log(graph.adjacencyList);
+// graph.addEdge('Tokyo', 'Rio');
+// graph.addEdge('Rio', 'Denver');
+// graph.addEdge('Denver', 'Stockholm');
+// graph.addEdge('Denver', 'Moscow');
+// graph.addEdge('Denver', 'Manila');
+// graph.addEdge('Moscow', 'Manila');
+
+// graph.addEdge('Tokyo', 'Nairobi');
+// graph.addEdge('Nairobi', 'Helsinki');
+// graph.addEdge('Nairobi', 'Bogotá');
+
+// console.log(graph.adjacencyList);
+
+// graph.removeVertex('Moscow');
+
+// console.log(graph.adjacencyList);
