@@ -66,7 +66,7 @@ class Graph {
     const stack = [start];
 
     while (stack.length) {
-      console.log(stack);
+      // console.log(stack);
       // pop
       let currentVertex = stack.pop();
       // visit popped
@@ -74,6 +74,26 @@ class Graph {
       // store popped vertex's neighbors
       this.adjacencyList[currentVertex].forEach((neighbor) => {
         if (!visited[neighbor]) stack.push(neighbor);
+      });
+    }
+
+    return Object.keys(visited);
+  }
+
+  breadthFirstIterative(start) {
+    const visited = {};
+    const queue = [start];
+
+    while (queue.length) {
+      console.log(queue);
+      // dequeue
+      let currentVertex = queue.shift();
+      // visited dequeued vertex
+      if (!visited[currentVertex]) visited[currentVertex] = true;
+      // enqueue neighbors
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor] && !queue.includes(neighbor))
+          queue.push(neighbor);
       });
     }
 
@@ -107,3 +127,4 @@ g.addEdge('E', 'F');
 
 console.log(g.depthFirstRecursive('A'));
 console.log(g.depthFirstIterative('A'));
+console.log(g.breadthFirstIterative('A'));
