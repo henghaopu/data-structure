@@ -14,13 +14,16 @@ class DoublyLinkedList {
   }
 
   push(val) {
+    // CREATE a new node
     const newNode = new Node(val);
     if (!this.length) {
       this.head = newNode;
       this.tail = newNode;
     } else {
+      // CONNECT the links
       this.tail.next = newNode;
       newNode.prev = this.tail; // * extra 1 line of code from SinglyLinkedList
+      // MOVE the tail
       this.tail = newNode;
     }
     this.length++;
@@ -30,7 +33,7 @@ class DoublyLinkedList {
   pop() {
     // edge case: no node
     if (!this.length) return null;
-    // record the last
+    // RECORD the last
     const poppingNode = this.tail;
     if (this.length === 1) {
       // edge case: one node
@@ -38,47 +41,57 @@ class DoublyLinkedList {
       this.head = null;
       this.tail = null;
     } else {
-      // general case: null <- 1 <-> 2 <-> 3 -> null 
-      // move the tail
+      // general case: null <- 1 <-> 2 <-> 3 -> null
+
+      // MOVE the tail
       this.tail = this.tail.prev;
-      // break the links
+      // BREAK the links
       this.tail.next = null;
       poppingNode.prev = null;
     }
     this.length--;
-    return poppingNode
+    return poppingNode;
   }
 
   shift() {
     // edge case 1: no node, return null
     if (!this.length) return null;
-    // edge case 2: one node, return head, make head and tail null manually 
+    // edge case 2: one node, return head, make head and tail null manually
+    // RECORD
     let output = this.head;
+
     if (this.length === 1) {
       this.head = null;
       this.tail = null;
       this.length--;
-      return output
+      return output;
     }
     // general case: move head, break the two-side bond
     // null <- 1 <-> 2 <-> 3 <-> null
     //                     t
     //         o     h
+
+    // MOVE the head
     this.head = this.head.next;
+    // BREAK the links
     this.head.prev = null;
     output.next = null;
+
     this.length--;
     return output;
   }
 
   unshift(val) {
+    // CREATE a new node
     let newNode = new Node(val);
     if (!this.length) {
       this.head = newNode;
       this.tail = newNode;
     } else {
+      // CONNECT the links
       newNode.next = this.head;
       this.head.prev = newNode;
+      // MOVE the head
       this.head = newNode;
     }
     this.length++;
@@ -130,7 +143,7 @@ class DoublyLinkedList {
     newNode.prev = beforeNode;
     afterNode.prev = newNode;
     beforeNode.next = newNode;
-    
+
     this.length++;
     return true;
   }
@@ -143,7 +156,7 @@ class DoublyLinkedList {
     const chosenNode = this.get(index);
     const beforeNode = chosenNode.prev;
     const afterNode = chosenNode.next;
-    
+
     beforeNode.next = afterNode;
     afterNode.prev = beforeNode;
 
@@ -157,12 +170,12 @@ class DoublyLinkedList {
   reverse() {
     let current = this.head;
     for (let i = 0; i < this.length; i++) {
-        [current.prev, current.next] = [current.next, current.prev]
-        current = current.prev
+      [current.prev, current.next] = [current.next, current.prev];
+      current = current.prev;
     }
-    [this.head, this.tail] = [this.tail, this.head]
-    
-    return this
+    [this.head, this.tail] = [this.tail, this.head];
+
+    return this;
   }
 }
 
@@ -172,5 +185,5 @@ list.push(2);
 list.push(3);
 list.push(4);
 list.push(5);
-console.log(list.reverse())
-console.log(list)
+console.log(list.reverse());
+console.log(list);
