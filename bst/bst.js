@@ -17,6 +17,7 @@ class BST {
 
   // best & avaerage time: O(log n); worse case: O(n)
   insert(val) {
+    //* CREATE
     const newNode = new Node(val);
     // edge case: no node
     if (!this.root) {
@@ -28,6 +29,7 @@ class BST {
       // go left
       if (val < current.val) {
         if (!current.left) {
+          //* CONNECT
           current.left = newNode;
           return this;
         }
@@ -35,6 +37,7 @@ class BST {
       } else if (val > current.val) {
         // go right
         if (!current.right) {
+          //* CONNECT
           current.right = newNode;
           return this;
         }
@@ -45,6 +48,7 @@ class BST {
     }
   }
   // best & averabe time: O(log n);  worse case: O(n)
+  // Level Search
   search(val) {
     let current = this.root;
     while (current) {
@@ -57,9 +61,14 @@ class BST {
 
   bfs() {
     let visited = [];
-    let queue = [this.root];
+
+    //* CREATE, enqueue
+    let queue = [this.root]; // Spcae: O(n)
+    // Time: O(n)
     while (queue.length) {
+      //* DEQUEUE, record
       const shiftedNode = queue.shift();
+      //* ENQUEUE
       if (shiftedNode.left) queue.push(shiftedNode.left);
       if (shiftedNode.right) queue.push(shiftedNode.right);
       visited.push(shiftedNode.val);
@@ -69,27 +78,60 @@ class BST {
 
   dfsPreorderIterative() {
     let visited = [];
+    //* CREATE, push
     let stack = [this.root]; // Spcae: O(n)
     // Time: O(n)
     while (stack.length) {
+      //* POP
       const poppedNode = stack.pop();
+      //* RECORD once being popped from the stack
       visited.push(poppedNode.val);
+      //* PUSH
       if (poppedNode.right) stack.push(poppedNode.right);
       if (poppedNode.left) stack.push(poppedNode.left);
     }
-
     return visited;
   }
+
+  // (not done)
+  // dfsPreorderIterative2() {
+  //   //* CREATE stack, push root
+  //   let stack = [this.root];
+  //   //* RECORD
+  //   let visited = [this.root.val];
+  //   // Time: O(n)
+  //   while (stack.length) {
+  //     //* POP
+  //     const poppedNode = stack.pop();
+
+  //     //* PUSH
+  //     if (poppedNode.right) {
+  //       stack.push(poppedNode.right)
+  //       //* RECORD once being pushed into stack
+  //       visited.push(poppedNode.right.val)
+  //     };
+  //     if (poppedNode.left) {
+  //       stack.push(poppedNode.left)
+  //       //* RECORD once being pushed into stack
+  //       visited.push(poppedNode.left.val)
+  //     };
+  //   }
+  //   return visited;
+  // }
 
   // pros: first node is the root node, so it's good for storing the data in db and then reconstructing the tree from it
   dfsPreOrder() {
     let visited = [];
-
+    //* CREATE callstack, push (DECLARE & CALL)
+    // (just map words to iterative way)
     (function visit(node) {
+      //* RECORD once being pushed into callstack
       visited.push(node.val);
+      //* PUSH into callstack (CALL)
       if (node.left) visit(node.left);
       if (node.right) visit(node.right);
     })(this.root);
+    //* POP from callstack
 
     return visited;
   }
@@ -123,9 +165,15 @@ bst.insert(10);
 bst.insert(13);
 bst.insert(17);
 bst.insert(11);
-bst.insert(5);
+
 bst.insert(8);
+bst.insert(5);
 bst.insert(3);
+console.log(bst.search(3));
+console.log(bst.search(2));
+console.log(bst.search(17));
+console.log(bst.search(18));
 
 console.log(bst.dfsPreOrder()); // [10,5,3,8,13,11,17]
 console.log(bst.dfsInOrder()); // [3,5,8,10,11,12,17]
+
