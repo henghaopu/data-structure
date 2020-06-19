@@ -2,8 +2,10 @@ class MaxBinaryHeap {
   heap = [];
 
   insert(val) {
+    // add to the end
     this.heap.push(val);
     let current = this.heap.length - 1;
+    // bubble up
     while (current > 0) {
       let parent = Math.floor((current - 1) / 2);
       if (this.heap[current] <= this.heap[parent]) break;
