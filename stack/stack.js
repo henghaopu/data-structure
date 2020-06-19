@@ -18,12 +18,15 @@ class Stack {
     if (!this.size) {
       this.top = newNode;
     } else {
-      // edge case: 1 node & general case: above 2 nodes are the same here  
+      // edge case: 1 node & general case: above 2 nodes are the same here
+
+      // CONNECT
       newNode.next = this.top;
+      // MOVE
       this.top = newNode;
     }
-  
-    return ++this.size
+
+    return ++this.size;
   }
 
   // same like shift in singly linked list
@@ -31,7 +34,10 @@ class Stack {
     // edge case: x node
     if (!this.size) return null;
     // edge case: 1 node and  general case are the same
+
+    // RECORD
     let poppingNode = this.top;
+    // MOVE
     this.top = this.top.next;
     this.size--;
     return poppingNode.val;
@@ -39,11 +45,10 @@ class Stack {
 }
 
 let stack = new Stack();
-console.log(stack.push(1))
-console.log(stack.push(2))
-console.log(stack.push(3))
-console.log(stack.pop())
-console.log(stack.pop())
-console.log(stack.pop())
-console.log(stack.pop())
-
+console.log(stack.push(1));
+console.log(stack.push(2));
+console.log(stack.push(3));
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());

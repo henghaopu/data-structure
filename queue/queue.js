@@ -14,14 +14,17 @@ class Queue {
 
   // push from tail
   enqueue(val) {
+    //* CREATE
     const newNode = new Node(val);
     // edge case: x node
     if (!this.size) {
+      //* MOVE
       this.head = newNode;
       this.tail = newNode;
     } else {
-      // general case
+      //* CONNECT
       this.tail.next = newNode;
+      //* MOVE
       this.tail = newNode;
     }
 
@@ -32,16 +35,18 @@ class Queue {
   dequeue() {
     // edge case: x node
     if (!this.size) return null;
+    //* RECORD
     const dequeuingNode = this.head;
     // edge case: 1 node
     if (this.size === 1) {
+      //* BREAK
       this.head = null;
       this.tail = null;
     } else {
-      // general case
+      //* MOVE
       this.head = this.head.next;
     }
-    
+
     this.size--;
     return dequeuingNode.val;
   }

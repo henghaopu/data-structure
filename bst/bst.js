@@ -61,6 +61,7 @@ class BST {
 
   bfs() {
     let visited = [];
+
     //* CREATE, enqueue
     let queue = [this.root]; // Spcae: O(n)
     // Time: O(n)
@@ -121,7 +122,6 @@ class BST {
   // pros: first node is the root node, so it's good for storing the data in db and then reconstructing the tree from it
   dfsPreOrder() {
     let visited = [];
-
     //* CREATE callstack, push (DECLARE & CALL)
     // (just map words to iterative way)
     (function visit(node) {
@@ -165,6 +165,7 @@ bst.insert(10);
 bst.insert(13);
 bst.insert(17);
 bst.insert(11);
+
 bst.insert(8);
 bst.insert(5);
 bst.insert(3);
@@ -172,3 +173,7 @@ console.log(bst.search(3));
 console.log(bst.search(2));
 console.log(bst.search(17));
 console.log(bst.search(18));
+
+console.log(bst.dfsPreOrder()); // [10,5,3,8,13,11,17]
+console.log(bst.dfsInOrder()); // [3,5,8,10,11,12,17]
+
